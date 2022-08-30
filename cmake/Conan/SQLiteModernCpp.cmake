@@ -14,15 +14,5 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} --build "${SQLiteModernCpp_ROOT}"
 )
 
-# Add sqlite3
-add_conan_package(sqlite3 3.39.2)
-find_package(SQLite3 MODULE REQUIRED)
-include_directories(BEFORE SYSTEM ${SQLite3_INCLUDE_DIRS})
-
-# Add include directories
-set(SQLITE_MODERN_CPP_INSTALL_DIR "${SQLiteModernCpp_ROOT}/install")
+find_package(SQLiteModernCpp CONFIG REQUIRED PATHS "${SQLiteModernCpp_ROOT}/install/lib/cmake/SQLiteModernCpp")
 include_directories(BEFORE SYSTEM "${SQLITE_MODERN_CPP_INSTALL_DIR}/include/")
-
-add_library(SQLiteModernCpp INTERFACE)
-add_library(SQLiteModernCpp::SQLiteModernCpp ALIAS SQLiteModernCpp)
-target_link_libraries(SQLiteModernCpp INTERFACE SQLite::SQLite3)
