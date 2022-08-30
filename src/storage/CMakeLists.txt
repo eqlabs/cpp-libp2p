@@ -5,6 +5,6 @@
 
 libp2p_add_library(p2p_sqlite sqlite.cpp)
 target_link_libraries(p2p_sqlite
-    SQLiteModernCpp::SQLiteModernCpp
+    $<BUILD_INTERFACE:SQLiteModernCpp::SQLiteModernCpp>
     p2p_logger
     )

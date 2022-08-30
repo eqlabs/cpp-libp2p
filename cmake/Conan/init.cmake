@@ -30,7 +30,7 @@ function(add_conan_package PACKAGE_NAME PACKAGE_VERSION)
 
     conan_cmake_configure(REQUIRES ${PACKAGE_NAME}/${PACKAGE_VERSION}
         GENERATORS cmake_find_package
-        OPTIONS ${MY_INSTALL_CONFIG_OPTIONS})
+        OPTIONS ${ADD_CONAN_PACKAGE_CONFIG_OPTIONS})
 
     conan_cmake_autodetect(CONAN_SETTINGS)
     conan_cmake_install(PATH_OR_REFERENCE .
