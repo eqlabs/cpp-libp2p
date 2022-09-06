@@ -7,7 +7,7 @@ add_executable(example_ares_resolver
     ares_resolver.cpp
     )
 target_link_libraries(example_ares_resolver
-    Boost::Boost.DI
+    ${BOOST_DI_TARGET}
     p2p_basic_host
     p2p_peer_repository
     p2p_inmem_address_repository

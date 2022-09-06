@@ -14,5 +14,6 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} --build "${SORALOG_ROOT}"
 )
 
-find_package(soralog CONFIG REQUIRED PATHS "${SORALOG_ROOT}/install/lib/cmake/soralog")
+set(SORALOG_PACKAGE_PATH "${SORALOG_ROOT}/install/lib/cmake/soralog")
+find_package(soralog CONFIG REQUIRED PATHS "${SORALOG_PACKAGE_PATH}")
 include_directories(BEFORE SYSTEM "${SORALOG_ROOT}/install/include")

@@ -14,5 +14,6 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} --build "${SQLiteModernCpp_ROOT}"
 )
 
-find_package(SQLiteModernCpp CONFIG REQUIRED PATHS "${SQLiteModernCpp_ROOT}/install/lib/cmake/SQLiteModernCpp")
+set(SQLITE_MODERN_CPP_PACKAGE_PATH "${SQLiteModernCpp_ROOT}/install/lib/cmake/SQLiteModernCpp")
+find_package(SQLiteModernCpp CONFIG REQUIRED PATHS "${SQLITE_MODERN_CPP_PACKAGE_PATH}")
 include_directories(BEFORE SYSTEM "${SQLITE_MODERN_CPP_INSTALL_DIR}/include/")
