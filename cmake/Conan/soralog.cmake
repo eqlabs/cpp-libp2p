@@ -10,8 +10,10 @@ execute_process(
 )
 
 # Build external soralog
+include(ProcessorCount)
+ProcessorCount(CPU_COUNT)
 execute_process(
-    COMMAND ${CMAKE_COMMAND} --build "${SORALOG_ROOT}"
+    COMMAND ${CMAKE_COMMAND} --build "${SORALOG_ROOT}" --parallel ${CPU_COUNT}
 )
 
 set(SORALOG_PACKAGE_PATH "${SORALOG_ROOT}/install/lib/cmake/soralog")
