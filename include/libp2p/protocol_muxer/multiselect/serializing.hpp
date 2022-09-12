@@ -18,6 +18,19 @@ namespace libp2p::protocol_muxer::multiselect::detail {
   using TmpMsgBuf =
       boost::container::static_vector<uint8_t,
                                       kMaxMessageSize + kMaxVarintSize>;
+#ifdef BOOST_NO_EXCEPTIONS
+  static_assert("Boost was configured without excpetions support");
+#else
+#if BOOST_VERSION <= 107600
+  using BadAllocException = std::bad_alloc;
+#else
+#ifdef BOOST_CONTAINER_USE_STD_EXCEPTIONS
+  using BadAllocException = std::bad_alloc;
+#else
+  using BadAllocException = boost::container::bad_alloc;
+#endif // BOOST_CONTAINER_USE_STD_EXCEPTIONS
+#endif // BOOST_VERSION <= 107600
+#endif // BOOST_NO_EXCEPTIONS
 
   /// Appends varint prefix to buffer
   template <typename Buffer>
@@ -72,7 +85,7 @@ namespace libp2p::protocol_muxer::multiselect::detail {
         buffer.push_back(kNewLine);
       }
 
-    } catch (const std::bad_alloc &e) {
+    } catch (const BadAllocException &e) {
       // static tmp buffer throws this on oversize
       return ProtocolMuxer::Error::INTERNAL_ERROR;
     }
