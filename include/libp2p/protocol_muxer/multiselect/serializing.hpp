@@ -19,7 +19,7 @@ namespace libp2p::protocol_muxer::multiselect::detail {
       boost::container::static_vector<uint8_t,
                                       kMaxMessageSize + kMaxVarintSize>;
 #ifdef BOOST_NO_EXCEPTIONS
-  static_assert("Boost was configured without excpetions support");
+  static_assert("Boost was configured without exceptions support");
 #else
 #if BOOST_VERSION <= 107600
   using BadAllocException = std::bad_alloc;
