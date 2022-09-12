@@ -1,13 +1,13 @@
-add_conan_package(boost 1.72.0
+add_conan_package(boost 1.79.0
     CONFIG_OPTIONS
     boost:without_atomic=False
     boost:without_chrono=False
-    boost:without_container=True
+    boost:without_container=False
     boost:without_context=True
     boost:without_contract=True
     boost:without_coroutine=True
     boost:without_date_time=True
-    boost:without_exception=True
+    boost:without_exception=False
     boost:without_fiber=True
     boost:without_filesystem=False
     boost:without_graph=True

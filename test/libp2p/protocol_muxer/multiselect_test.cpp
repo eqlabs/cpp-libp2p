@@ -17,10 +17,11 @@
  */
 TEST(Multiselect, TmpBufThrows) {
   using libp2p::protocol_muxer::multiselect::detail::TmpMsgBuf;
+  using libp2p::protocol_muxer::multiselect::detail::BadAllocException;
   using libp2p::protocol_muxer::multiselect::kMaxMessageSize;
   TmpMsgBuf buf;
   buf.resize(kMaxMessageSize / 2);
-  EXPECT_THROW(buf.resize(buf.capacity() + 1), std::bad_alloc);
+  EXPECT_THROW(buf.resize(buf.capacity() + 1), BadAllocException);
 }
 
 TEST(Multiselect, SingleValidMessages) {
