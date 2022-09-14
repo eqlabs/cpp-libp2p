@@ -7,6 +7,9 @@ if("@PACKAGE_MANAGER@" STREQUAL "Conan")
 
     find_dependency(Boost MODULE REQUIRED random filesystem program_options)
     find_dependency(Microsoft.GSL MODULE REQUIRED)
+    # More valid way woud be to add interface dependency for every
+    # target that uses gsl library, but it's used in so many places
+    # that it's easier to ad to a whole project
     include_directories(${Microsoft.GSL_INCLUDE_DIRS})
     find_dependency(OpenSSL MODULE REQUIRED)
     find_dependency(Protobuf MODULE REQUIRED)
@@ -21,6 +24,9 @@ if("@PACKAGE_MANAGER@" STREQUAL "Conan")
 else()
     find_dependency(Boost CONFIG REQUIRED random filesystem program_options)
     find_dependency(Microsoft.GSL CONFIG REQUIRED)
+    # More valid way woud be to add interface dependency for every
+    # target that uses gsl library, but it's used in so many places
+    # that it's easier to ad to a whole project
     include_directories(${Microsoft.GSL_INCLUDE_DIRS})
     find_dependency(OpenSSL REQUIRED)
     find_dependency(Protobuf CONFIG REQUIRED)
