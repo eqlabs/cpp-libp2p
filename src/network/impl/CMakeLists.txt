@@ -8,7 +8,7 @@ libp2p_add_library(p2p_router
     )
 target_link_libraries(p2p_router
     Boost::boost
-    $<BUILD_INTERFACE:${TSL_HAT_TRIE_TARGET}>
+    ${TSL_HAT_TRIE_TARGET}
     p2p_peer_id
     )
 
