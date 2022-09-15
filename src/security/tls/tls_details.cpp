@@ -26,6 +26,7 @@ namespace libp2p::security::tls_details {
       Obj *obj;
       Deleter *deleter;
 
+      // NOLINTNEXTLINE
       Cleanup(Obj *o, Deleter *d) : obj(o), deleter(d) {}
 
       ~Cleanup() {
