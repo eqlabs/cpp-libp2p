@@ -165,7 +165,7 @@ namespace libp2p::security::tls_details {
 
     // assigns random SN to certificate
     void assignSerial(X509 *cert) {
-      BIGNUM *bn = BN_new();
+      BIGNUM *bn = BN_new(); // NOLINT
       CLEANUP_PTR(bn, BN_free);
       if (BN_pseudo_rand(bn, 64, 0, 0) == 0) {
         throw std::runtime_error("BN_pseudo_rand failed");
@@ -206,14 +206,14 @@ namespace libp2p::security::tls_details {
 
     void insertExtension(
         X509 *cert, const std::array<uint8_t, kExtensionDataSize> &ext_data) {
-      ASN1_OCTET_STRING *os = ASN1_OCTET_STRING_new();
+      ASN1_OCTET_STRING *os = ASN1_OCTET_STRING_new(); // NOLINT
       CLEANUP_PTR(os, ASN1_OCTET_STRING_free);
       ASN1_OCTET_STRING_set(os, ext_data.data(), ext_data.size()); // NOLINT
 
       ASN1_OBJECT *obj = OBJ_txt2obj(extension_oid.data(), 1);
       CLEANUP_PTR(obj, ASN1_OBJECT_free);
 
-      X509_EXTENSION *ex = X509_EXTENSION_create_by_OBJ(nullptr, obj, 0, os);
+      X509_EXTENSION *ex = X509_EXTENSION_create_by_OBJ(nullptr, obj, 0, os); // NOLINT
       if (ex == nullptr) {
         throw std::runtime_error("cannot create extension");
       }
@@ -288,6 +288,7 @@ namespace libp2p::security::tls_details {
         gsl::span<const uint8_t> data) {
       KeyAndSignature result;
 
+      // NOLINTNEXTLINE
       bool ok = (data.size() == kExtensionDataSize) && (data[0] == kSequenceTag)
           && (data[1] == kExtensionDataSize - kAsnHeaderSize)
           && (data[2] == kOctetStringTag)
@@ -322,7 +323,7 @@ namespace libp2p::security::tls_details {
       X509_EXTENSION *ext = X509_get_ext(peer_certificate, index);
       assert(ext);
 
-      ASN1_OCTET_STRING *os = X509_EXTENSION_get_data(ext);
+      ASN1_OCTET_STRING *os = X509_EXTENSION_get_data(ext); // NOLINT
       assert(os);
 
       auto ks_binary = unmarshalExtensionData(
@@ -504,7 +505,7 @@ namespace libp2p::security::tls_details {
 
 }  // namespace libp2p::security::tls_details
 
-OUTCOME_CPP_DEFINE_CATEGORY(libp2p::security, TlsError, e) {
+OUTCOME_CPP_DEFINE_CATEGORY(libp2p::security, TlsError, e) { // NOLINT
   using E = libp2p::security::TlsError;
   switch (e) {
     case E::TLS_CTX_INIT_FAILED:
