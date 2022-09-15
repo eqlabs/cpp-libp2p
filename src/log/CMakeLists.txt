@@ -8,6 +8,7 @@ libp2p_add_library(p2p_logger
     configurator.cpp
     )
 target_link_libraries(p2p_logger
+    ${BOOST_DI_TARGET}
     soralog::soralog
     soralog::fallback_configurator
     soralog::configurator_yaml
