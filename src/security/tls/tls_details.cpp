@@ -144,7 +144,7 @@ namespace libp2p::security::tls_details {
       memcpy(pk_data.data(), host_private_key.data.data(), 32);
 
       return crypto::ed25519::Ed25519ProviderImpl{}
-          .sign(gsl::span<const uint8_t>(buf, msg_len), pk_data)
+          .sign(gsl::span<const uint8_t>(buf, msg_len), pk_data) // NOLINT
           .value();
     }
 
@@ -153,7 +153,7 @@ namespace libp2p::security::tls_details {
                       const crypto::ecdsa::PublicKey &cert_pub_key) {
       EVP_PKEY *pub = nullptr;
       const auto *data = cert_pub_key.data();
-      d2i_PUBKEY(&pub, &data, cert_pub_key.size());
+      d2i_PUBKEY(&pub, &data, cert_pub_key.size()); // NOLINT
       if (pub == nullptr) {
         throw std::runtime_error("cannot deserialize certificate public key");
       }
@@ -208,7 +208,7 @@ namespace libp2p::security::tls_details {
         X509 *cert, const std::array<uint8_t, kExtensionDataSize> &ext_data) {
       ASN1_OCTET_STRING *os = ASN1_OCTET_STRING_new();
       CLEANUP_PTR(os, ASN1_OCTET_STRING_free);
-      ASN1_OCTET_STRING_set(os, ext_data.data(), ext_data.size());
+      ASN1_OCTET_STRING_set(os, ext_data.data(), ext_data.size()); // NOLINT
 
       ASN1_OBJECT *obj = OBJ_txt2obj(extension_oid.data(), 1);
       CLEANUP_PTR(obj, ASN1_OBJECT_free);
@@ -225,7 +225,7 @@ namespace libp2p::security::tls_details {
                          const crypto::ecdsa::PrivateKey &priv_key) {
       EC_KEY *ec_key = nullptr;
       const uint8_t *data = priv_key.data();
-      d2i_ECPrivateKey(&ec_key, &data, priv_key.size());
+      d2i_ECPrivateKey(&ec_key, &data, priv_key.size()); // NOLINT
       if (ec_key == nullptr) {
         throw std::runtime_error("cannot deserialize ECDSA private key");
       }
