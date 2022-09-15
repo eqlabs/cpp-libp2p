@@ -8,5 +8,6 @@ libp2p_add_library(p2p_cares
     )
 target_link_libraries(p2p_cares
     c-ares::cares
+    ${TSL_HAT_TRIE_TARGET}
     ${CMAKE_THREAD_LIBS_INIT}
     )
