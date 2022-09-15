@@ -59,8 +59,13 @@ namespace libp2p::connection {
 
     // this lambda checks, if there's enough data in our read buffer, and gives
     // it to the caller, if so
-    auto read_lambda = [self{shared_from_this()}, cb{std::move(cb)}, out, bytes,
+    auto read_lambda = [weak{weak_from_this()}, cb{std::move(cb)}, out, bytes,
                         some](outcome::result<size_t> res) mutable {
+      auto self = weak.lock();
+      if (!self) {
+	return cb(Error::STREAM_INTERNAL_ERROR);
+      }
+
       if (!res) {
         self->data_notified_ = true;
         return cb(res);
