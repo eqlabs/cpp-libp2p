@@ -1,4 +1,4 @@
-add_conan_package(boost 1.79.0
+add_conan_package(boost 1.80.0
     CONFIG_OPTIONS
     boost:without_atomic=False
     boost:without_chrono=False
