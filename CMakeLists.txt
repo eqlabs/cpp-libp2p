@@ -1,5 +1,18 @@
 cmake_minimum_required(VERSION 3.12)
 
+if (NOT PLC_PROFILE)
+  set(PLC_PROFILE "cmake/clang_release_profile.cmake")
+endif()
+set(PLC_PROFILE_PATH "${CMAKE_SOURCE_DIR}/${PLC_PROFILE}")
+include("${PLC_PROFILE_PATH}")
+
+message(STATUS "---- top level cmakelists.txt-----")
+message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
+message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
+message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
+message(STATUS "CMAKE_C_COMPILER is ${CMAKE_C_COMPILER}")
+message(STATUS "PACKAGE_MANAGER is ${PACKAGE_MANAGER}")
+
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)

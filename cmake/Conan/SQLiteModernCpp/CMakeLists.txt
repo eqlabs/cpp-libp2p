@@ -3,6 +3,14 @@ cmake_minimum_required(VERSION 3.14)
 project(soralog)
 include(ExternalProject)
 
+message(STATUS "---- sqlite/cmakefiles.txt-----")
+message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
+include(${PLC_PROFILE_PATH})
+message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
+message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
+message(STATUS "CMAKE_C_COMPILER is ${CMAKE_C_COMPILER}")
+message(STATUS "PACKAGE_MANAGER is ${PACKAGE_MANAGER}")
+
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(SQLiteModernCpp
     GIT_REPOSITORY    "git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git"
@@ -15,4 +23,6 @@ ExternalProject_Add(SQLiteModernCpp
     LOG_DIR           "${CMAKE_BINARY_DIR}/log"
     LOG_INSTALL       TRUE
     LOG_CONFIGURE     TRUE
-    CMAKE_ARGS        -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} -DPACKAGE_MANAGER=Conan)
+    CMAKE_ARGS        -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} -DPACKAGE_MANAGER=${PACKAGE_MANAGER} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER} -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+)
+
