@@ -1,12 +1,18 @@
 cmake_minimum_required(VERSION 3.12)
 
-if (NOT PLC_PROFILE)
-  set(PLC_PROFILE "cmake/clang_release_profile.cmake")
+message(STATUS "---- top level cpp-libp2p cmakelists.txt A-----")
+message(STATUS "PLC_PROFILE_PATH at start is ${PLC_PROFILE_PATH}")
+
+if (NOT PLC_PROFILE_PATH)
+  if (NOT PLC_PROFILE)
+    set(PLC_PROFILE "clang_debug")
+  endif()
+  set(PLC_PROFILE_PATH "${CMAKE_SOURCE_DIR}/cmake/${PLC_PROFILE}_profile.cmake")
 endif()
-set(PLC_PROFILE_PATH "${CMAKE_SOURCE_DIR}/${PLC_PROFILE}")
+
 include("${PLC_PROFILE_PATH}")
 
-message(STATUS "---- top level cmakelists.txt-----")
+message(STATUS "---- top level cpp-libp2p cmakelists.txt B -----")
 message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
 message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
 message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
