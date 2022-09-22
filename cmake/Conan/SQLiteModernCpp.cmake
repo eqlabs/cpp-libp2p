@@ -3,10 +3,6 @@
 set(SQLiteModernCpp_ROOT "${CMAKE_BINARY_DIR}/SQLiteModernCpp")
 file(MAKE_DIRECTORY "${SQLiteModernCpp_ROOT}")
 
-
-message(STATUS "---- sqlite.cmake-----")
-message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
-
 # Configure external SQLiteModernCpp
 execute_process(
     COMMAND ${CMAKE_COMMAND} "${CMAKE_CURRENT_LIST_DIR}/SQLiteModernCpp" -DPLC_PROFILE_PATH=${PLC_PROFILE_PATH}

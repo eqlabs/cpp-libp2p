@@ -3,10 +3,6 @@
 set(SORALOG_ROOT "${CMAKE_BINARY_DIR}/soralog")
 file(MAKE_DIRECTORY "${SORALOG_ROOT}")
 
-message(STATUS "---- sorlalog.cmake -----")
-message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
-
-
 # Configure external soralog
 execute_process(
     COMMAND ${CMAKE_COMMAND} "${CMAKE_CURRENT_LIST_DIR}/soralog" -DPLC_PROFILE_PATH=${PLC_PROFILE_PATH}
