@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-if (NOT PLC_PROFILE_PATH)
-  include("${CMAKE_CURRENT_LIST_DIR}/cmake/set_profile_path.cmake")
-  set_profile_path()
-endif()
-include("${PLC_PROFILE_PATH}")
 
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND)
