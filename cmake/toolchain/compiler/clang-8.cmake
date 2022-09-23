@@ -11,8 +11,8 @@ if(XCODE_VERSION)
   fatal_error(${_err})
 endif()
 
-find_program(CMAKE_C_COMPILER clang-8)
-find_program(CMAKE_CXX_COMPILER clang++-8)
+find_program(CMAKE_C_COMPILER clang-8 NO_CACHE)
+find_program(CMAKE_CXX_COMPILER clang++-8 NO_CACHE)
 
 if(NOT CMAKE_C_COMPILER)
   fatal_error("clang-8 not found")
