@@ -32,9 +32,3 @@ set(
     "C++ compiler"
     FORCE
 )
-
-if ((${CMAKE_MATCH_1} LESS 9) OR ((${CMAKE_MATCH_1} EQUAL 9) AND (${CMAKE_MATCH_2} LESS 2)))
-    add_cache_flag(CMAKE_EXE_LINKER_FLAGS "-lstdc++fs")
-    add_cache_flag(CMAKE_SHARED_LINKER_FLAGS "-lstdc++fs")
-endif()
-
