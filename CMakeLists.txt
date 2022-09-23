@@ -1,23 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-message(STATUS "---- top level cpp-libp2p cmakelists.txt A-----")
-message(STATUS "PLC_PROFILE_PATH at start is ${PLC_PROFILE_PATH}")
-
-if (NOT PLC_PROFILE_PATH)
-  if (NOT PLC_PROFILE)
-    set(PLC_PROFILE "clang_debug")
-  endif()
-  set(PLC_PROFILE_PATH "${CMAKE_SOURCE_DIR}/cmake/${PLC_PROFILE}_profile.cmake")
-endif()
-
-include("${PLC_PROFILE_PATH}")
-
-message(STATUS "---- top level cpp-libp2p cmakelists.txt B -----")
-message(STATUS "PLC_PROFILE_PATH is ${PLC_PROFILE_PATH}")
-message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
-message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
-message(STATUS "CMAKE_C_COMPILER is ${CMAKE_C_COMPILER}")
-message(STATUS "PACKAGE_MANAGER is ${PACKAGE_MANAGER}")
 
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND)
@@ -31,6 +13,9 @@ set(CMAKE_TOOLCHAIN_FILE
     FILEPATH
     "Default toolchain"
     )
+
+
+include("${CMAKE_SOURCE_DIR}/cmake/toolchain/cxx17.cmake")
 
 include("cmake/3rdparty_utils.cmake")
 cmake_policy(SET CMP0048 NEW)
