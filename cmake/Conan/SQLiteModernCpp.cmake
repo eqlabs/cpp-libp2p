@@ -5,7 +5,7 @@ file(MAKE_DIRECTORY "${SQLiteModernCpp_ROOT}")
 
 # Configure external SQLiteModernCpp
 execute_process(
-    COMMAND ${CMAKE_COMMAND} "${CMAKE_CURRENT_LIST_DIR}/SQLiteModernCpp"
+    COMMAND ${CMAKE_COMMAND} "${CMAKE_CURRENT_LIST_DIR}/SQLiteModernCpp" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
     WORKING_DIRECTORY "${SQLiteModernCpp_ROOT}"
 )
 
