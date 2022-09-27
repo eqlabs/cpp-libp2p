@@ -16,6 +16,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 function(add_conan_package PACKAGE_NAME PACKAGE_VERSION)
+    message(STATUS "add_conan_package 0000")
     set(PACKAGE_DIR "${CMAKE_BINARY_DIR}/${PACKAGE_NAME}")
     file(MAKE_DIRECTORY "${PACKAGE_DIR}")
     # We have to use a hack to change CMAKE_CURRENT_BINARY_DIR because
@@ -32,11 +33,14 @@ function(add_conan_package PACKAGE_NAME PACKAGE_VERSION)
         GENERATORS cmake_find_package
         OPTIONS ${ADD_CONAN_PACKAGE_CONFIG_OPTIONS})
 
+    set(CONAN_ENV "CXXFLAGS=${CMAKE_CXX_FLAGS}; CFLAGS=${CMAKE_C_FLAGS}")
+
     conan_cmake_autodetect(CONAN_SETTINGS)
     conan_cmake_install(PATH_OR_REFERENCE .
         BUILD missing
         REMOTE conancenter
-        SETTINGS ${CONAN_SETTINGS})
+        SETTINGS ${CONAN_SETTINGS}
+        ENV ${CONAN_ENV})
     set(CMAKE_CURRENT_BINARY_DIR "${PREV_CMAKE_CURRENT_BINARY_DIR}")
     list(APPEND CMAKE_MODULE_PATH "${PACKAGE_DIR}")
     set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)

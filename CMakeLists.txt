@@ -43,11 +43,11 @@ print("Using CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}")
 set_property(GLOBAL PROPERTY TEST_TARGETS)
 
 include(CheckCXXCompilerFlag)
+include(cmake/san.cmake)
 include(cmake/install.cmake)
 include(cmake/libp2p_add_library.cmake)
 include(cmake/dependencies.cmake)
 include(cmake/functions.cmake)
-include(cmake/san.cmake)
 
 if (METRICS_ENABLED)
   add_compile_definitions("LIBP2P_METRICS_ENABLED")
