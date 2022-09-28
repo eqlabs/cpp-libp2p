@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND)
   set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
@@ -14,9 +13,7 @@ set(CMAKE_TOOLCHAIN_FILE
     "Default toolchain"
     )
 
-
 include("${CMAKE_SOURCE_DIR}/cmake/toolchain/cxx17.cmake")
-
 include("cmake/3rdparty_utils.cmake")
 cmake_policy(SET CMP0048 NEW)
 

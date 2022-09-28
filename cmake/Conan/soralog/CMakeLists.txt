@@ -3,11 +3,6 @@ cmake_minimum_required(VERSION 3.14)
 project(soralog)
 include(ExternalProject)
 
-message(STATUS "asdf: soralog - cmakefiles.txt")
-message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
-message(STATUS "CMAKE_C_COMPILER is ${CMAKE_C_COMPILER}")
-message(STATUS "CMAKE_TOOLCHAIN_FILE is ${CMAKE_TOOLCHAIN_FILE}")
-
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(soralog
     GIT_REPOSITORY     "git@github.com:eqlabs/soralog.git"
