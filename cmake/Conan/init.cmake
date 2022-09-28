@@ -16,7 +16,6 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 function(add_conan_package PACKAGE_NAME PACKAGE_VERSION)
-    message(STATUS "add_conan_package 0000")
     set(PACKAGE_DIR "${CMAKE_BINARY_DIR}/${PACKAGE_NAME}")
     file(MAKE_DIRECTORY "${PACKAGE_DIR}")
     # We have to use a hack to change CMAKE_CURRENT_BINARY_DIR because
