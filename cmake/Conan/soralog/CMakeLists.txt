@@ -6,7 +6,7 @@ include(ExternalProject)
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(soralog
     GIT_REPOSITORY     "git@github.com:eqlabs/soralog.git"
-    GIT_TAG            "sanitizer_support"
+    GIT_TAG            "master"
     GIT_SHALLOW        TRUE
     DOWNLOAD_DIR       "${CMAKE_BINARY_DIR}/download"
     SOURCE_DIR         "${CMAKE_BINARY_DIR}/src"
