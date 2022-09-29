@@ -34,7 +34,9 @@ option(MSAN "Enable memory sanitizer" OFF)
 option(TSAN "Enable thread sanitizer" OFF)
 option(UBSAN "Enable UB sanitizer" OFF)
 
-option(SAN "Enable sanitizer" OFF)
+# One flag to set a given sanitizer - will be passed to dependencies
+option(SAN "Enable sanitizer (ASAN/LSAN/MSAN/TSAN/UBSAN)" OFF)
+
 option(EXPOSE_MOCKS "Make mocks header files visible for child projects" ON)
 option(METRICS_ENABLED "Enable libp2p metrics" OFF)
 
