@@ -26,12 +26,19 @@ option(EXAMPLES "Build examples" ON)
 option(CLANG_FORMAT "Enable clang-format target" ON)
 option(CLANG_TIDY "Enable clang-tidy checks during compilation" OFF)
 option(COVERAGE "Enable generation of coverage info" OFF)
+
 # sanitizers will be enabled only for libp2p, and will be disabled for dependencies
+option(ASAN "Enable address sanitizer" OFF)
+option(LSAN "Enable leak sanitizer" OFF)
+option(MSAN "Enable memory sanitizer" OFF)
+option(TSAN "Enable thread sanitizer" OFF)
+option(UBSAN "Enable UB sanitizer" OFF)
+
 option(SAN "Enable sanitizer" OFF)
 option(EXPOSE_MOCKS "Make mocks header files visible for child projects" ON)
 option(METRICS_ENABLED "Enable libp2p metrics" OFF)
 
-include(cmake/print.cmake)
+include(cmake/utils.cmake)
 print("C flags: ${CMAKE_C_FLAGS}")
 print("CXX flags: ${CMAKE_CXX_FLAGS}")
 print("Using CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}")
