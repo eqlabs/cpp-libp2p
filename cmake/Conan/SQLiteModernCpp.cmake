@@ -9,7 +9,7 @@ execute_process(
     WORKING_DIRECTORY "${SQLiteModernCpp_ROOT}"
 )
 
-# Build external SQLiteModernCpf
+# Build external SQLiteModernCpp
 execute_process(
     COMMAND ${CMAKE_COMMAND} --build "${SQLiteModernCpp_ROOT}"
 )
