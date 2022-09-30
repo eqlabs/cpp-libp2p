@@ -9,7 +9,6 @@ if(SAN OR ASAN OR LSAN OR MSAN OR TSAN OR UBSAN)
     set(POLLY_FLAGS_SANITIZE_ADDRESS_CMAKE_ 1)
   endif ()
 
-  set(SAN_FLAGS -g)
   if(SAN STREQUAL "ASAN" OR ASAN)
     print("Address Sanitizer is enabled")
     include(${CMAKE_CURRENT_LIST_DIR}/toolchain/flags/sanitize_address.cmake)
