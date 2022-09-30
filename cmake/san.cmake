@@ -1,7 +1,5 @@
 include(${CMAKE_CURRENT_LIST_DIR}/utils.cmake)
 
-
-
 if(SAN OR ASAN OR LSAN OR MSAN OR TSAN OR UBSAN)
   if (DEFINED POLLY_FLAGS_SANITIZE_ADDRESS_CMAKE_)
     return()
@@ -25,5 +23,5 @@ if(SAN OR ASAN OR LSAN OR MSAN OR TSAN OR UBSAN)
     print("Undefined Behavior Sanitizer is enabled")
     include(${CMAKE_CURRENT_LIST_DIR}/toolchain/flags/sanitize_undefined.cmake)
   endif()
-  process_sanitizer_flags()
+  process_sanitizer_flags()  
 endif()
