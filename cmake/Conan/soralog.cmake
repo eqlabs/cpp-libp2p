@@ -3,8 +3,8 @@
 set(SORALOG_ROOT "${CMAKE_BINARY_DIR}/soralog")
 file(MAKE_DIRECTORY "${SORALOG_ROOT}")
 
-if($ENV{SORALOG_SHH_KEY})
-    set(SORALOG_ENV "GIT_SSH_COMMAND=\"ssh -i $ENV{SORALOG_SHH_KEY}\"")
+if($ENV{SORALOG_SSH_KEY_PATH})
+    set(SORALOG_ENV "GIT_SSH_COMMAND=\"ssh -i $ENV{SORALOG_SSH_KEY_PATH}\"")
 endif()
 
 # Configure external soralog

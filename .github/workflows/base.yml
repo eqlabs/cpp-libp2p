@@ -36,6 +36,8 @@ jobs:
       env:
         CC: ${{ matrix.compiler.cc }}
         CXX: ${{ matrix.compiler.cxx }}
+        SORALOG_SSH_KEY: ${{ secrets.SORALOGDEP }}
+        SQLITE_SHH_KEY: ${{ secrets.SQLITEDEP }}
       run: |
         set -e
         conan profile new default
@@ -49,9 +51,9 @@ jobs:
         cd build
         eval `ssh-agent -s`
         set -x
-        ./soralog.key <<< '${{ secrets.SORALOGDEP }}'
-        export SORALOG_SSH_KEY=$(readlink -f ./soralog.key)
-        ./sqlite.key <<< '${{ secrets.SQLITEDEP }}'
-        export SQLITE_SHH_KEY=$(readlink -f ./sqlite.key)
+        echo ${SORALOG_SSH_KEY} > ./soralog.key
+        export SORALOG_SSH_KEY_PATH=$(readlink -f ./soralog.key)
+        echo ${SQLITE_SSH_KEY} > ./soralog.key
+        export SQLITE_SSH_KEY_PATH=$(readlink -f ./sqlite.key)
         cmake -DPACKAGE_MANAGER=Conan ..
         make

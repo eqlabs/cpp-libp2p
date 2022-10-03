@@ -3,8 +3,8 @@
 set(SQLiteModernCpp_ROOT "${CMAKE_BINARY_DIR}/SQLiteModernCpp")
 file(MAKE_DIRECTORY "${SQLiteModernCpp_ROOT}")
 
-if($ENV{SQLITE_SHH_KEY})
-    set(SQLITE_ENV "GIT_SSH_COMMAND=\"ssh -i $ENV{SQLITE_SHH_KEY}\"")
+if($ENV{SQLITE_SSH_KEY_PATH})
+    set(SQLITE_ENV "GIT_SSH_COMMAND=\"ssh -i $ENV{SQLITE_SSH_KEY_PATH}\"")
 endif()
 
 # Configure external SQLiteModernCpp
