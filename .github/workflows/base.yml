@@ -48,16 +48,16 @@ jobs:
         eval `ssh-agent -s`
         mkdir build
         cd build
-	mkdir soralog
-	cd soralog
-	ssh-add - <<< '${{ secrets.SORALOGDEP }}'
-	git clone git@github.com:eqlabs/soralog.git src
-	ssh-add -D # this is necessary - ssh client does not handle more than 1 deploy key
-	cd ..
-	mkdir SQLiteModernCpp
-	cd SQLiteModernCpp
-	ssh-add - <<< '${{ secrets.SQLITEDEP }}'
-	git clone git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git src
-	cd ..
+        mkdir soralog
+        cd soralog
+        ssh-add - <<< '${{ secrets.SORALOGDEP }}'
+        git clone git@github.com:eqlabs/soralog.git src
+        ssh-add -D # this is necessary - ssh client does not handle more than 1 deploy key
+        cd ..
+        mkdir SQLiteModernCpp
+        cd SQLiteModernCpp
+        ssh-add - <<< '${{ secrets.SQLITEDEP }}'
+        git clone git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git src
+        cd ..
         cmake ..
         make
