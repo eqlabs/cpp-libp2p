@@ -57,7 +57,7 @@ jobs:
         mkdir SQLiteModernCpp
         cd SQLiteModernCpp
         ssh-add - <<< '${{ secrets.SQLITEDEP }}'
-        git clone git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git src
+        git clone -b hunter git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git src
         cd ..
         cmake -DPACKAGE_MANAGER=Conan ..
         make
