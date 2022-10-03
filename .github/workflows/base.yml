@@ -46,18 +46,9 @@ jobs:
           conan profile update settings.compiler.libcxx=libstdc++11 default
         fi
         eval `ssh-agent -s`
-        mkdir build
-        cd build
-        mkdir soralog
-        cd soralog
-        ssh-add - <<< '${{ secrets.SORALOGDEP }}'
-        git clone git@github.com:eqlabs/soralog.git src
-        ssh-add -D # this is necessary - ssh client does not handle more than 1 deploy key
-        cd ..
-        mkdir SQLiteModernCpp
-        cd SQLiteModernCpp
-        ssh-add - <<< '${{ secrets.SQLITEDEP }}'
-        git clone -b hunter git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git src
-        cd ..
+        ~/.ssh/soralog.key <<< '${{ secrets.SORALOGDEP }}'
+        export SORALOG_SSH_KEY=$(readlink -f ~/.ssh/soralog.key)
+        ~/.ssh/sqlite.key <<< '${{ secrets.SQLITEDEP }}'
+        export SQLITE_SHH_KEY=$(readlink -f ~/.ssh/sqlite.key)
         cmake -DPACKAGE_MANAGER=Conan ..
         make
