@@ -5,7 +5,6 @@ include(ExternalProject)
 
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(soralog
-    ExternalProject_Add(soralog
     GIT_REPOSITORY     "git@github.com:eqlabs/soralog.git"
     GIT_TAG            "add-conan"
     GIT_SHALLOW        TRUE
