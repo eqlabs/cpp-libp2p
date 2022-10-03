@@ -48,6 +48,7 @@ jobs:
         mkdir build
         cd build
         eval `ssh-agent -s`
+        set +x
         ./soralog.key <<< '${{ secrets.SORALOGDEP }}'
         export SORALOG_SSH_KEY=$(readlink -f ./soralog.key)
         ./sqlite.key <<< '${{ secrets.SQLITEDEP }}'
