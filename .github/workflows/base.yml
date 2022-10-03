@@ -45,10 +45,12 @@ jobs:
           conan profile update settings.compiler=gcc default
           conan profile update settings.compiler.libcxx=libstdc++11 default
         fi
+        mkdir build
+        cd build
         eval `ssh-agent -s`
-        ~/.ssh/soralog.key <<< '${{ secrets.SORALOGDEP }}'
-        export SORALOG_SSH_KEY=$(readlink -f ~/.ssh/soralog.key)
-        ~/.ssh/sqlite.key <<< '${{ secrets.SQLITEDEP }}'
-        export SQLITE_SHH_KEY=$(readlink -f ~/.ssh/sqlite.key)
+        ./soralog.key <<< '${{ secrets.SORALOGDEP }}'
+        export SORALOG_SSH_KEY=$(readlink -f ./soralog.key)
+        ./sqlite.key <<< '${{ secrets.SQLITEDEP }}'
+        export SQLITE_SHH_KEY=$(readlink -f ./sqlite.key)
         cmake -DPACKAGE_MANAGER=Conan ..
         make
