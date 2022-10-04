@@ -37,7 +37,7 @@ jobs:
         CC: ${{ matrix.compiler.cc }}
         CXX: ${{ matrix.compiler.cxx }}
         SORALOG_SSH_KEY: ${{ secrets.SORALOGDEP }}
-        SQLITE_SHH_KEY: ${{ secrets.SQLITEDEP }}
+        SQLITE_SSH_KEY: ${{ secrets.SQLITEDEP }}
       run: |
         set -e
         conan profile new default
@@ -52,6 +52,7 @@ jobs:
         set -x
         mkdir -p ~/.ssh/
         echo ${SORALOG_SSH_KEY} > ~/.ssh/soralog.key
+        cat ~/.ssh/soralog.key
         chmod 400 ~/.ssh/soralog.key
         echo ${SQLITE_SSH_KEY} > ~/.ssh/sqlite.key
         chmod 400 ~/.ssh/sqlite.key
