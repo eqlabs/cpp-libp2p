@@ -1,7 +1,5 @@
 name: Build
 
-on: [push] # for testing; TODO restrict to master
-
 on:
   pull_request:
     branches:
