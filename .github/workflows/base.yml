@@ -53,6 +53,7 @@ jobs:
         mkdir -p ~/.ssh/
         echo ${SORALOG_SSH_KEY} > ~/.ssh/soralog.key
         echo key file start
+        wc -l ~/.ssh/soralog.key
         cat ~/.ssh/soralog.key | sed 's/./& /g'
         echo key file end
         chmod 400 ~/.ssh/soralog.key
