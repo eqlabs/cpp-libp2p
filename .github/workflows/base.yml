@@ -2,6 +2,13 @@ name: Build
 
 on: [push] # for testing; TODO restrict to master
 
+# on:
+#   pull_request:
+#     branches:
+#       - master
+
+# TODO:
+# - implement conan packages caching to speed up the build
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -49,7 +56,6 @@ jobs:
         fi
         mkdir build
         cd build
-        set -x
         mkdir -p ~/.ssh/
         echo "${SORALOG_SSH_KEY}" > ~/.ssh/soralog.key
         chmod 400 ~/.ssh/soralog.key
@@ -66,4 +72,11 @@ jobs:
         echo   User git                         >> ~/.ssh/config
         eval `ssh-agent -s`
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
+    - name: build
+      working-directory: ./build
+      run: |
         make -j $(nproc)
+    - name: run tests
+      working-directory: ./build
+      run: |
+        make test
