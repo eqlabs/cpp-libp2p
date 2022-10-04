@@ -64,7 +64,6 @@ jobs:
         echo   HostName github.com              >> ~/.ssh/config
         echo   IdentityFile ~/.ssh/sqlite.key   >> ~/.ssh/config
         echo   User git                         >> ~/.ssh/config
-        cat ~/.ssh/config
         eval `ssh-agent -s`
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
-        make
+        make -j $(nproc)
