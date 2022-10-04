@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# FIXME: revert
+add_3rdparty(soralog)
+
 if (TESTING)
   add_3rdparty(GTest)
 endif()
@@ -15,7 +18,6 @@ add_3rdparty(Protobuf)
 add_3rdparty(c-ares)
 add_3rdparty(fmt)
 add_3rdparty(yaml-cpp)
-add_3rdparty(soralog)
 add_3rdparty(tsl_hat_trie)
 add_3rdparty(Boost.DI)
 add_3rdparty(SQLiteModernCpp)

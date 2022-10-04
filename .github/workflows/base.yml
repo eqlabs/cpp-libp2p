@@ -54,6 +54,7 @@ jobs:
         echo ${SORALOG_SSH_KEY} > ~/.ssh/soralog.key
         echo ${SQLITE_SSH_KEY} > ~/.ssh/sqlite.key
         echo "Host soralog\nHostName github.com\nIdentityFile ~soralog.key\nUser git\n\nHost sqlite\nHostName github.com\nIdentityFile ~/.ssh/sqlite.key\n" > ~/.ssh/config
+        cat ~/.ssh/config
         eval `ssh-agent -s`
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
         make
