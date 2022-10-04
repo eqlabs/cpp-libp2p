@@ -3,13 +3,13 @@
 set(SQLiteModernCpp_ROOT "${CMAKE_BINARY_DIR}/SQLiteModernCpp")
 file(MAKE_DIRECTORY "${SQLiteModernCpp_ROOT}")
 
-if($ENV{SQLITE_SSH_KEY_PATH})
-    set(SQLITE_ENV "-E env GIT_SSH_COMMAND=\"ssh -i $ENV{SQLITE_SSH_KEY_PATH}\"")
-endif()
+set(SQLITE_GITHUB_HOST "github.com" CACHE STRING "Host for SQLiteModernCPP repo (maybe overriden to provide custom ssh key)")
 
 # Configure external SQLiteModernCpp
 execute_process(
-    COMMAND ${CMAKE_COMMAND} ${SQLITE_ENV} "${CMAKE_CURRENT_LIST_DIR}/SQLiteModernCpp" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+    COMMAND ${CMAKE_COMMAND} ${SQLITE_ENV} "${CMAKE_CURRENT_LIST_DIR}/SQLiteModernCpp"
+        -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+        -DGITHUB_HOST=${SQLITE_GITHUB_HOST}
     WORKING_DIRECTORY "${SQLiteModernCpp_ROOT}"
 )
 

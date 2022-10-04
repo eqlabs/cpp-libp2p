@@ -5,7 +5,7 @@ include(ExternalProject)
 
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(SQLiteModernCpp
-    GIT_REPOSITORY    "git@github.com:eqlabs/libp2p-sqlite-modern-cpp.git"
+    GIT_REPOSITORY    "git@${GITHUB_HOST}:eqlabs/libp2p-sqlite-modern-cpp.git"
     GIT_TAG           "add-conan"
     GIT_SHALLOW       TRUE
     DOWNLOAD_DIR      "${CMAKE_BINARY_DIR}/download"

@@ -3,14 +3,13 @@
 set(SORALOG_ROOT "${CMAKE_BINARY_DIR}/soralog")
 file(MAKE_DIRECTORY "${SORALOG_ROOT}")
 
-if($ENV{SORALOG_SSH_KEY_PATH})
-    set(SORALOG_ENV "-E env GIT_SSH_COMMAND=\"ssh -i $ENV{SORALOG_SSH_KEY_PATH}\"")
-endif()
-#set (SORALOG_ENV "GIT_SSH_COMMAND=\"ssh -i /home/dgordon/.ssh\"")
+set(SORALOG_GITHUB_HOST "github.com" CACHE STRING "Host for soralog repo (maybe overriden to provide custom ssh key)")
 
 # Configure external soralog
 execute_process(
-    COMMAND ${CMAKE_COMMAND} ${SORALOG_SSH_KEY_PATH} "${CMAKE_CURRENT_LIST_DIR}/soralog" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+    COMMAND ${CMAKE_COMMAND} "${CMAKE_CURRENT_LIST_DIR}/soralog" 
+        -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+        -DGITHUB_HOST=${SORALOG_GITHUB_HOST}
     WORKING_DIRECTORY "${SORALOG_ROOT}"
 )
 
