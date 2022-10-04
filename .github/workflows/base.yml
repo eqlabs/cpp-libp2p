@@ -2,10 +2,10 @@ name: Build
 
 on: [push] # for testing; TODO restrict to master
 
-# on:
-#   pull_request:
-#     branches:
-#       - master
+on:
+  pull_request:
+    branches:
+      - master
 
 # TODO:
 # - implement conan packages caching to speed up the build
