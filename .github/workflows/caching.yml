@@ -47,7 +47,7 @@ jobs:
         # caching node_modules
         path: ~/.conan/data
         # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf
+        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf2
         restore-keys: |
           ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
           ${{ matrix.compiler.cc }}-build-
@@ -94,15 +94,15 @@ jobs:
         echo Cached build F
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
         echo Cached build G
-    # - name: build
-    #   working-directory: ./build
-    #   run: |
-    #     echo Cached build H
-    #     make -j $(nproc)
-    #     echo Cached build I
-    # - name: run tests
-    #   working-directory: ./build
-    #   run: |
-    #     echo Cached build J
-    #     make test
-    #     echo Cached build K
+    - name: build
+      working-directory: ./build
+      run: |
+        echo Cached build H
+        make -j $(nproc)
+        echo Cached build I
+    - name: run tests
+      working-directory: ./build
+      run: |
+        echo Cached build J
+        make test
+        echo Cached build K
