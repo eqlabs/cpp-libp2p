@@ -1,0 +1,91 @@
+name: Cached-Build
+
+on:
+  workflow_dispatch:
+    branches:
+      - master
+
+# TODO:
+# - implement conan packages caching to speed up the build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        compiler: [{
+          "cc": "gcc",
+          "cxx": "g++"
+         }, {
+          "cc": "clang",
+          "cxx": "clang++"
+        }]
+    steps:
+    - uses: actions/checkout@v1
+      name: checkout
+      with:
+        clean: true
+        fetch-depth: 1
+    - name: install dependencies
+      run: |
+        set -e
+        echo Cached build A
+        sudo apt-get update || true
+        sudo apt-get install -y apt-utils build-essential libssl-dev cmake python3 python3-pip
+        sudo pip install conan
+        echo Cached build B
+    - name: select clang
+      if: matrix.compiler.cc == 'clang'
+      run: |
+        echo Cached build C
+        sudo apt-get install -y clang
+        echo Cached build D
+    - name: cmake
+      env:
+        CC: ${{ matrix.compiler.cc }}
+        CXX: ${{ matrix.compiler.cxx }}
+        SORALOG_SSH_KEY: ${{ secrets.SORALOGDEP }}
+        SQLITE_SSH_KEY: ${{ secrets.SQLITEDEP }}
+      run: |
+        echo Cached build E
+        set -e
+        conan profile new default
+        conan profile update settings.arch=x86_64 default
+        conan profile update settings.os=Linux default
+        if [ "$CC" = "gcc" ]; then
+          conan profile update settings.compiler=gcc default
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+        fi
+        mkdir build
+        cd build
+        mkdir -p ~/.ssh/
+        echo "${SORALOG_SSH_KEY}" > ~/.ssh/soralog.key
+        chmod 400 ~/.ssh/soralog.key
+        echo "${SQLITE_SSH_KEY}" > ~/.ssh/sqlite.key
+        chmod 400 ~/.ssh/sqlite.key
+        echo Host soralog                       > ~/.ssh/config
+        echo   HostName github.com              >> ~/.ssh/config
+        echo   IdentityFile ~/.ssh/soralog.key  >> ~/.ssh/config
+        echo   User git                         >> ~/.ssh/config
+        echo                                    >> ~/.ssh/config
+        echo Host sqlite                        >> ~/.ssh/config
+        echo   HostName github.com              >> ~/.ssh/config
+        echo   IdentityFile ~/.ssh/sqlite.key   >> ~/.ssh/config
+        echo   User git                         >> ~/.ssh/config
+        eval `ssh-agent -s`
+        echo Cached build F
+        cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
+        echo Cached build G
+    - name: build
+      working-directory: ./build
+      run: |
+        echo Cached build H
+        make -j $(nproc)
+        echo Cached build I
+    - name: run tests
+      working-directory: ./build
+      run: |
+        echo Cached build J
+        make test
+        echo Cached build K
