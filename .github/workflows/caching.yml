@@ -1,8 +1,13 @@
 name: Cached-Build
 
-on: [workflow_dispatch,push]
-  branches:
-    github-action
+on:
+- workflow_dispatch:
+    branches:
+      github-action
+- push:
+    branches:
+      github-action
+
 
 # TODO:
 # - implement conan packages caching to speed up the build
