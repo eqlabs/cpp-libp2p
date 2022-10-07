@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     branches:
     - master
-  push:
-    branches:
-    - github-action
+  # push:
+  #   branches:
+  #   - github-action
 
 
 # TODO:
