@@ -3,10 +3,10 @@ name: Cached-Build
 on:
   workflow_dispatch:
     branches:
-      - master
+      - github-action
   push:
     branches:
-      - master
+      - github-action
 
 # TODO:
 # - implement conan packages caching to speed up the build
