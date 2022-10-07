@@ -3,7 +3,7 @@ name: Cached-Build
 on:
   workflow_dispatch:
     branches:
-    - github-action
+    - master
   push:
     branches:
     - github-action
