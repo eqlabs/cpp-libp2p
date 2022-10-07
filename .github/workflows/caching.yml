@@ -1,10 +1,10 @@
 name: Cached-Build
 
 on:
-  - workflow_dispatch:
+  workflow_dispatch:
     branches:
     - github-action
-  - push:
+  push:
     branches:
     - github-action
 
