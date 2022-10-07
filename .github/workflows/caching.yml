@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
     branches:
       - master
-
+  push:
+    branches:
+      - master
 # TODO:
 # - implement conan packages caching to speed up the build
 jobs:
