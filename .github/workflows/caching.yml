@@ -48,7 +48,7 @@ jobs:
         path: ~/.conan/data
         # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         # key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf2
-        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-${{ hashFiles('cmake/**', 'CMakeList.txt') }}
+        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-${{ hashFiles('cmake/**', 'CMakeLists.txt') }}
         restore-keys: |
           ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
           ${{ matrix.compiler.cc }}-build-
