@@ -39,6 +39,19 @@ jobs:
         sudo apt-get install -y apt-utils build-essential libssl-dev cmake python3 python3-pip
         sudo pip install conan
         echo Cached build B
+    - name: Cache Conan Data
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-conan-data
+      with:
+        # caching node_modules
+        path: ~/.conan/data
+        # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf
+        restore-keys: |
+          ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
+          ${{ matrix.compiler.cc }}-build-
+          ${{ matrix.compiler.cc }}-
     - name: select clang
       if: matrix.compiler.cc == 'clang'
       run: |
@@ -81,15 +94,15 @@ jobs:
         echo Cached build F
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
         echo Cached build G
-    - name: build
-      working-directory: ./build
-      run: |
-        echo Cached build H
-        make -j $(nproc)
-        echo Cached build I
-    - name: run tests
-      working-directory: ./build
-      run: |
-        echo Cached build J
-        make test
-        echo Cached build K
+    # - name: build
+    #   working-directory: ./build
+    #   run: |
+    #     echo Cached build H
+    #     make -j $(nproc)
+    #     echo Cached build I
+    # - name: run tests
+    #   working-directory: ./build
+    #   run: |
+    #     echo Cached build J
+    #     make test
+    #     echo Cached build K
