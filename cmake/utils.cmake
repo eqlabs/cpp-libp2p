@@ -1,0 +1,42 @@
+function(print)
+  message(STATUS "[${CMAKE_PROJECT_NAME}] ${ARGV}")
+endfunction()
+
+function(fatal_error)
+  message(FATAL_ERROOR "[${CMAKE_PROJECT_NAME}] ${ARGV}")
+endfunction()
+
+function(add_cache_flag var_name flag)
+  set(spaced_string " ${${var_name}} ")
+  string(FIND "${spaced_string}" " ${flag} " flag_index)
+  if(NOT flag_index EQUAL -1)
+    return()
+  endif()
+  string(COMPARE EQUAL "" "${${var_name}}" is_empty)
+  if(is_empty)
+    # beautify: avoid extra space at the end if var_name is empty
+    set("${var_name}" "${flag}" CACHE STRING "" FORCE)
+  else()
+    set("${var_name}" "${flag} ${${var_name}}" CACHE STRING "" FORCE)
+  endif()
+endfunction()
+
+function (process_sanitizer_flags)
+    foreach(FLAG IN LISTS SAN_FLAGS)
+        add_cache_flag(CMAKE_CXX_FLAGS ${FLAG})
+        add_cache_flag(CMAKE_C_FLAGS ${FLAG})
+        add_cache_flag(CMAKE_EXE_LINKER_FLAGS ${FLAG})
+        add_cache_flag(CMAKE_SHARED_LINKER_FLAGS ${FLAG})
+    endforeach()
+
+    #only when SAN flag is set sanitizer flags will be propagated to dependencies
+    if (SAN)
+      set(PROPAGATED_CXX_FLAGS ${CMAKE_CXX_FLAGS} PARENT_SCOPE)
+      set(PROPAGATED_C_FLAGS ${CMAKE_C_FLAGS} PARENT_SCOPE)
+      set(PROPAGATED_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} PARENT_SCOPE)
+      set(PROPAGATED_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} PARENT_SCOPE)
+
+      string(REPLACE ";" " " SAN_FLAGS_STRING "${SAN_FLAGS}")
+      set(CONAN_ENV "CXXFLAGS=${SAN_FLAGS_STRING}; CFLAGS=${SAN_FLAGS_STRING}; LDFLAGS=${SAN_FLAGS_STRING}" PARENT_SCOPE)
+    endif()
+endfunction()
