@@ -4,9 +4,10 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
+    branches:
+    - github-action
 
-# TODO:
-# - implement conan packages caching to speed up the build
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,6 +34,16 @@ jobs:
         sudo apt-get update || true
         sudo apt-get install -y apt-utils build-essential libssl-dev cmake python3 python3-pip
         sudo pip install conan
+    - name: Cache Conan Data
+      uses: actions/cache@v3
+      env:
+        cache-name: conan-data
+      with:
+        # caching node_modules
+        path: ~/.conan/data
+        key: ${{ matrix.compiler.cc }}-${{ env.cache-name }}
+        restore-keys: |
+          ${{ matrix.compiler.cc }}-${{ env.cache-name }}
     - name: select clang
       if: matrix.compiler.cc == 'clang'
       run: |
