@@ -48,10 +48,10 @@ jobs:
         # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         # key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf2
         key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-${{ hashFiles('cmake/**', 'CMakeLists.txt') }}
-        restore-keys: |
-          ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
-          ${{ matrix.compiler.cc }}-build-
-          ${{ matrix.compiler.cc }}-
+        # restore-keys: |
+        #   ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
+        #   ${{ matrix.compiler.cc }}-build-
+        #   ${{ matrix.compiler.cc }}-
     - name: select clang
       if: matrix.compiler.cc == 'clang'
       run: |
