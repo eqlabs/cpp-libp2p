@@ -6,7 +6,7 @@ function(add_cache_flag var_name flag)
   endif()
   string(COMPARE EQUAL "" "${${var_name}}" is_empty)
   if(is_empty)
-    # beautify: avoid extra space at the end if var_name is empty
+    # beautify: avoid extra space at the end if var_name is empty.
     set("${var_name}" "${flag}" CACHE STRING "" FORCE)
   else()
     set("${var_name}" "${flag} ${${var_name}}" CACHE STRING "" FORCE)
