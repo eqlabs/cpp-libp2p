@@ -67,12 +67,8 @@ jobs:
         cd build
         mkdir -p ~/.ssh/
         echo "${SORALOG_SSH_KEY}" > ~/.ssh/soralog.key
-        echo asdf soralog
-        cat ~/.ssh/soralog.key
         chmod 400 ~/.ssh/soralog.key
         echo "${SQLITE_SSH_KEY}" > ~/.ssh/sqlite.key
-        echo asdf sqlite
-        cat ~/.ssh/sqlite.key
         chmod 400 ~/.ssh/sqlite.key
         echo Host soralog                       > ~/.ssh/config
         echo   HostName github.com              >> ~/.ssh/config
@@ -84,14 +80,12 @@ jobs:
         echo   IdentityFile ~/.ssh/sqlite.key   >> ~/.ssh/config
         echo   User git                         >> ~/.ssh/config
         eval `ssh-agent -s`
-        echo asdf config
-        cat ~/.ssh/config
         cmake -DPACKAGE_MANAGER=Conan -DSORALOG_GITHUB_HOST=soralog -DSQLITE_GITHUB_HOST=sqlite ..
-    # - name: build
-    #   working-directory: ./build
-    #   run: |
-    #     make -j $(nproc)
-    # - name: run tests
-    #   working-directory: ./build
-    #   run: |
-    #     make test
+    - name: build
+      working-directory: ./build
+      run: |
+        make -j $(nproc)
+    - name: run tests
+      working-directory: ./build
+      run: |
+        make test
