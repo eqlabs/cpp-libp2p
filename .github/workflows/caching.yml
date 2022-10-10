@@ -41,15 +41,15 @@ jobs:
     - name: Cache Conan Data
       uses: actions/cache@v3
       env:
-        cache-name: cache-conan-data
+        cache-name: conan-data
       with:
         # caching node_modules
         path: ~/.conan/data
         # key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         # key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-asdf2
-        key: ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-${{ hashFiles('cmake/**', 'CMakeLists.txt') }}
-        # restore-keys: |
-        #   ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
+        key: ${{ matrix.compiler.cc }}-${{ env.cache-name }}-${{ hashFiles('cmake/**', 'CMakeLists.txt') }}
+        restore-keys: |
+          ${{ matrix.compiler.cc }}-build-${{ env.cache-name }}-
         #   ${{ matrix.compiler.cc }}-build-
         #   ${{ matrix.compiler.cc }}-
     - name: select clang
