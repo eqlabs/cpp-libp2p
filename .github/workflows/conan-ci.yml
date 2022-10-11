@@ -39,7 +39,7 @@ jobs:
       env:
         cache-name: conan-data
       with:
-        # caching node_modules
+        # cache conan data
         path: ~/.conan/data
         key: ${{ matrix.compiler.cc }}-${{ env.cache-name }}
         restore-keys: |
