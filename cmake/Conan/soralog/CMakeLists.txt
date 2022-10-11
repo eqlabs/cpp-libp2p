@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.14)
 
+# force cache flush
+
 project(soralog)
 include(ExternalProject)
 
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 ExternalProject_Add(soralog
-    GIT_REPOSITORY     "git@github.com:eqlabs/soralog.git"
-    GIT_TAG            "master"
+    GIT_REPOSITORY     "git@${GITHUB_HOST}:eqlabs/soralog.git"
+    GIT_TAG            "add-conan"
     GIT_SHALLOW        TRUE
     DOWNLOAD_DIR       "${CMAKE_BINARY_DIR}/download"
     SOURCE_DIR         "${CMAKE_BINARY_DIR}/src"
